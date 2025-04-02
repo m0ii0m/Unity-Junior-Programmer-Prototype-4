@@ -8,6 +8,7 @@ public class SpawnManager : MonoBehaviour
     public int enemyCount;
     public int waveNumber;
     public GameObject powerupPrefab;
+    public bool gameOver;
 
     private float spawnRange = 9;
 
@@ -17,11 +18,14 @@ public class SpawnManager : MonoBehaviour
         waveNumber = 1;
         SpawnEnemyWaves(waveNumber);
         SpawnPowerup();
+        gameOver = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (gameOver) return;
+
         enemyCount = FindObjectsOfType<Enemy>().Length;
         if (enemyCount == 0)
         {

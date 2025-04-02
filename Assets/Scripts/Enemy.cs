@@ -8,18 +8,22 @@ public class Enemy : MonoBehaviour
 
     private Rigidbody enemyRb;
     private GameObject player;
+    private SpawnManager spawnManager;
 
     // Start is called before the first frame update
     void Start()
     {
         enemyRb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
+        spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(transform.position.y < -10)
+        if(spawnManager.gameOver) return;
+
+        if (transform.position.y < -10)
         {
             Destroy(gameObject);
         }
